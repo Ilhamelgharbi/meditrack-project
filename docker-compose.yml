@@ -1,0 +1,140 @@
+# =============================================================================
+# MediTrack AI - Docker Compose Configuration
+# =============================================================================
+# Full-stack deployment: Backend (FastAPI + AI) + Frontend (React/Vite)
+# 
+# Usage:
+#   docker-compose up -d              # Start all services
+#   docker-compose up -d --build      # Rebuild and start
+#   docker-compose logs -f backend    # View backend logs
+#   docker-compose down               # Stop all services
+#
+# First run:
+#   cp .env.example .env              # Create environment file
+#   # Edit .env with your API keys
+#   docker-compose up -d --build
+# =============================================================================
+
+name: meditrack
+
+services:
+  # ===========================================================================
+  # Backend Service - FastAPI + AI Agent
+  # ===========================================================================
+  backend:
+    build:
+      context: ./meditrcak
+      dockerfile: Dockerfile
+    container_name: meditrack-backend
+    restart: unless-stopped
+    
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    
+    environment:
+      # ----- Required API Keys -----
+      - GROQ_API_KEY=${GROQ_API_KEY:?GROQ_API_KEY is required}
+      - SECRET_KEY=${SECRET_KEY:-meditrack-secret-change-in-production}
+      
+      # Database
+      - DATABASE_URL=sqlite:///./testagent.db
+      
+      # ----- AI/ML Configuration (CPU-Only) -----
+      - GROQ_MODEL_NAME=${GROQ_MODEL_NAME:-llama-3.1-8b-instant}
+      - EMBEDDING_MODEL_NAME=${EMBEDDING_MODEL_NAME:-sentence-transformers/all-MiniLM-L6-v2}
+      - IMAGE_RECOGNITION_MODEL=${IMAGE_RECOGNITION_MODEL:-openai/clip-vit-base-patch32}
+      - TORCH_DEVICE=cpu
+      - CUDA_VISIBLE_DEVICES=
+      
+      # ----- Voice (Optional) -----
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY:-}
+      - ELEVENLABS_VOICE_ID=${ELEVENLABS_VOICE_ID:-21m00Tcm4TlvDq8ikWAM}
+      
+      # ----- WhatsApp/Twilio (Optional) -----
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID:-}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN:-}
+      - TWILIO_WHATSAPP_NUMBER=${TWILIO_WHATSAPP_NUMBER:-}
+      - ENABLE_WHATSAPP=${ENABLE_WHATSAPP:-false}
+      
+      # ----- Paths -----
+      - DB_FAISS_PATH=/app/app/agent/vectorstore/db_faiss
+      - UPLOADS_PATH=/app/app/agent/uploads
+      - VECTORSTORE_PATH=/app/app/agent/vectorstore
+      
+      # ----- Performance Settings -----
+      - MAX_CONVERSATION_HISTORY=20
+      - API_TIMEOUT_SECONDS=30
+      - OMP_NUM_THREADS=4
+      - MKL_NUM_THREADS=4
+      
+    volumes:
+      # Persist database
+      - meditrack-db:/app/meditrack.db
+      # Persist uploads
+      - meditrack-uploads:/app/app/agent/uploads
+      # Persist vectorstore (RAG index)
+      - meditrack-vectorstore:/app/app/agent/vectorstore
+      # Persist HuggingFace cache (faster restarts)
+      - meditrack-hf-cache:/app/.cache
+      
+    networks:
+      - meditrack-network
+      
+    # Limit resources for CPU-only deployment
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+
+  # ===========================================================================
+  # Frontend Service - React/Vite with Serve
+  # ===========================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: meditrack-frontend
+    restart: unless-stopped
+
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+
+    environment:
+      - VITE_API_URL=${VITE_API_URL:-http://backend:8000}
+
+    networks:
+      - meditrack-network
+
+    depends_on:
+      backend:
+        condition: service_started
+
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5173/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  meditrack-network:
+    driver: bridge
+    name: meditrack-network
+
+# =============================================================================
+# Named Volumes (Persistent Data)
+# =============================================================================
+volumes:
+  meditrack-db:
+    name: meditrack-db
+  meditrack-uploads:
+    name: meditrack-uploads
+  meditrack-vectorstore:
+    name: meditrack-vectorstore
+  meditrack-hf-cache:
+    name: meditrack-hf-cache

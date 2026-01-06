@@ -1,0 +1,65 @@
+# =============================================================================
+# MediTrack AI - Environment Variables
+# =============================================================================
+# Copy this file to .env and fill in your values
+# cp .env.example .env
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Required API Keys
+# -----------------------------------------------------------------------------
+# Groq API Key (get free at https://console.groq.com)
+GROQ_API_KEY=your-groq-api-key-here
+
+# Secret key for JWT tokens (generate with: openssl rand -hex 32)
+SECRET_KEY=your-secret-key-change-in-production
+
+# -----------------------------------------------------------------------------
+# AI Model Configuration
+# -----------------------------------------------------------------------------
+# LLM Model (Groq options: llama-3.1-8b-instant, llama-3.1-70b-versatile, mixtral-8x7b-32768)
+GROQ_MODEL_NAME=llama-3.1-8b-instant
+
+# Embedding model for RAG (default works well, no need to change)
+EMBEDDING_MODEL_NAME=sentence-transformers/all-MiniLM-L6-v2
+
+# Image recognition model for pill identification
+IMAGE_RECOGNITION_MODEL=openai/clip-vit-base-patch32
+
+# -----------------------------------------------------------------------------
+# Voice/TTS (Optional)
+# -----------------------------------------------------------------------------
+# ElevenLabs for high-quality TTS (https://elevenlabs.io)
+ELEVENLABS_API_KEY=
+ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
+
+# -----------------------------------------------------------------------------
+# WhatsApp Integration (Optional)
+# -----------------------------------------------------------------------------
+# Twilio credentials (https://www.twilio.com)
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
+ENABLE_WHATSAPP=false
+
+# -----------------------------------------------------------------------------
+# Docker Ports
+# -----------------------------------------------------------------------------
+BACKEND_PORT=8000
+FRONTEND_PORT=80
+
+# Frontend API URL (for Docker, use http://localhost:8000)
+VITE_API_URL=http://localhost:8000
+
+# -----------------------------------------------------------------------------
+# Performance Settings
+# -----------------------------------------------------------------------------
+# Number of CPU threads for ML operations
+OMP_NUM_THREADS=4
+MKL_NUM_THREADS=4
+
+# Conversation history limit
+MAX_CONVERSATION_HISTORY=20
+
+# API timeout in seconds
+API_TIMEOUT_SECONDS=30

@@ -1,0 +1,126 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Database files (will be created at runtime)
+*.db
+meditrack.db
+test_*.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if any frontend files are mixed)
+node_modules/
+
+# Documentation
+*.md
+docs/
+
+# Development files
+.env.example
+docker-compose*.yml
+Dockerfile*
+docker*
+
+# Vector store (will be built at runtime or mounted)
+vectorstore/
+!agent/vectorstore/
+
+# Uploads (will be created at runtime)
+uploads/
+!agent/uploads/
+
+# Additional ignores
+test_*.py
+check_*.py
+ai/
+checks/
+tests/
+
+# More ignores
+intent classifier/
+files/
+venv/
+backup/
+agent/plan
+agent/streamlit/
+agent/data/
+
+# Frontend and other project directories (not needed for backend Docker)
+frontend*/
+meditrack-fil-rouge/
+meditrack-frontend/
+omnichat-ai-assistant/
+planning/
+
+# Additional temp/cache
+*.log
+.cache/
+tmp/
+temp/

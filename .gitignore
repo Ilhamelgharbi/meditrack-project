@@ -1,0 +1,198 @@
+﻿# ============================================
+# MediTrack AI - Git Ignore Configuration
+# ============================================
+
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+.python-version
+
+# Requirements files (keep only requirements.txt)
+requirements-*.txt
+!requirements.txt
+
+# ============================================
+# Testing & Coverage
+# ============================================
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+*/.pytest_cache/
+
+# ============================================
+# Node.js / Frontend
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+*.tsbuildinfo
+.next/
+.nuxt/
+.parcel-cache/
+
+# Build outputs
+frontend/dist/
+dist/
+
+# ============================================
+# IDE & Editors
+# ============================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Databases
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+meditrack.db
+testagent.db
+db.sqlite3-journal
+
+# ============================================
+# AI/ML Data & Models (LARGE FILES)
+# ============================================
+# Agent data folder (PDFs, images, archives)
+meditrcak/app/agent/data/archive/
+app/agent/data/archive/
+
+# Vector stores (FAISS indexes)
+meditrcak/app/agent/vectorstore/
+app/agent/vectorstore/
+
+# RAG data
+meditrcak/app/agent/rag/data/
+app/agent/rag/data/
+
+# Uploaded files
+meditrcak/app/agent/uploads/
+app/agent/uploads/
+uploads/
+
+# Model caches
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+
+# ============================================
+# Environment & Secrets
+# ============================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ============================================
+# Logs & Temporary Files
+# ============================================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+reminder_scheduler.log
+
+# ============================================
+# Docker
+# ============================================
+docker-compose.override.yml
+
+# ============================================
+# Backup & Cleanup Files
+# ============================================
+*-backup/
+*-backup-*/
+cleanup-backup-*/
+cleanup-v2-*/
+project-folders-backup/
+fil-rouge-meditrack-ai/
+meditrackfinal/
+src0/
+frontend/src0/
+
+# Cleanup scripts
+cleanup_*.ps1
+check_usage.ps1
+
+# ============================================
+# OS Generated Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+desktop.ini
+
+# ============================================
+# Keep Important Files
+# ============================================
+!.github/
+!.env.example
+!docker-compose.yml
+docker-compose.backend.yml
+docker-compose.simple.yml
+DOCKER-README.md
+!README.md
