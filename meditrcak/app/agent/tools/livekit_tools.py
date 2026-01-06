@@ -98,7 +98,7 @@ def capture_livekit_frame(runtime: ToolRuntime, room_name: str, participant_id: 
     Returns:
         Dict with captured frame path
     """
-    if not ENABLE_LIVEKIT:
+    if not settings.ENABLE_LIVEKIT:
         return {
             "error": "LiveKit is disabled",
             "message": "Enable in config"
@@ -141,7 +141,7 @@ def transcribe_livekit_audio(runtime: ToolRuntime, room_name: str, duration_seco
     Returns:
         Dict with audio transcription
     """
-    if not ENABLE_LIVEKIT:
+    if not settings.ENABLE_LIVEKIT:
         return {
             "error": "LiveKit is disabled",
             "message": "Enable in config"

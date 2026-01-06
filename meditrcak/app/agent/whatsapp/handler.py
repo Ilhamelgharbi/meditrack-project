@@ -140,7 +140,7 @@ def handle_media(media_url: str, user_id: str) -> str:
         # Get media with authentication
         response = requests.get(
             media_url,
-            auth=(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN),
+            auth=(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN),
             timeout=10
         )
         response.raise_for_status()
@@ -219,13 +219,13 @@ if __name__ == "__main__":
     print("WhatsApp Handler Module")
     print("=" * 60)
     
-    if not ENABLE_WHATSAPP:
+    if not settings.ENABLE_WHATSAPP:
         print("\n⚠️  WhatsApp integration is disabled")
         print("   Set ENABLE_WHATSAPP=true in .env to enable")
     else:
         print(f"\n✓ WhatsApp enabled")
-        print(f"  From Number: {TWILIO_WHATSAPP_NUMBER}")
+        print(f"  From Number: {settings.TWILIO_WHATSAPP_NUMBER}")
         
-        if not TWILIO_ACCOUNT_SID or not TWILIO_AUTH_TOKEN:
+        if not settings.TWILIO_ACCOUNT_SID or not settings.TWILIO_AUTH_TOKEN:
             print("\n⚠️  Twilio credentials not configured")
             print("   Set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN in .env")

@@ -199,7 +199,7 @@ def get_checkpointer(use_persistent: bool = False):
             from langgraph.checkpoint.sqlite import SqliteSaver  # type: ignore
             
             # Extract sqlite path from DATABASE_URL
-            sqlite_path = DATABASE_URL.replace("sqlite:///", "").replace("./", "")
+            sqlite_path = settings.DATABASE_URL.replace("sqlite:///", "").replace("./", "")
             
             # SqliteSaver automatically creates tables
             checkpointer = SqliteSaver.from_conn_string(sqlite_path)

@@ -18,7 +18,7 @@ from app.config.settings import settings
 logger = logging.getLogger(__name__)
 
 
-def load_pdf_documents(directory: str = PDF_DATA_PATH) -> List[Any]:
+def load_pdf_documents(directory: str = settings.PDF_DATA_PATH) -> List[Any]:
     """
     Load all PDF documents from a directory.
     
@@ -48,7 +48,7 @@ def load_pdf_documents(directory: str = PDF_DATA_PATH) -> List[Any]:
         return []
 
 
-def load_text_documents(directory: str = PDF_DATA_PATH) -> List[Any]:
+def load_text_documents(directory: str = settings.PDF_DATA_PATH) -> List[Any]:
     """
     Load all text documents from a directory.
     

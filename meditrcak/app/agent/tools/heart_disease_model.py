@@ -25,7 +25,7 @@ def load_model():
     if _model is not None:
         return _model
     
-    model_path = Path(HEART_DISEASE_MODEL_PATH)
+    model_path = Path(settings.HEART_DISEASE_MODEL_PATH)
     if not model_path.exists():
         logger.warning(f"Heart disease model not found at {settings.HEART_DISEASE_MODEL_PATH}")
         return None

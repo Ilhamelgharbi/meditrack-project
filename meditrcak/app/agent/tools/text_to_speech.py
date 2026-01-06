@@ -170,7 +170,7 @@ def _text_to_speech_elevenlabs(text: str, output_path: Path) -> Dict[str, Any]:
             "audio_path": str(output_path),
             "text_length": len(text),
             "provider": "ElevenLabs Cloud API",
-            "voice_id": ELEVENLABS_VOICE_ID,
+            "voice_id": settings.ELEVENLABS_VOICE_ID,
             "model": "eleven_turbo_v2",
             "format": "mp3",
             "api_endpoint": "api.elevenlabs.io"
@@ -213,7 +213,7 @@ def tts_gtts(runtime: ToolRuntime, text: str, output_filename: Optional[str] = N
         output_filename = f"tts_gtts_test.mp3"
     
     # Ensure audio uploads directory exists
-    audio_dir = Path(UPLOADS_PATH) / "audio"
+    audio_dir = Path(settings.UPLOADS_PATH) / "audio"
     audio_dir.mkdir(parents=True, exist_ok=True)
     output_path = audio_dir / output_filename
     
@@ -251,7 +251,7 @@ def tts_elevenlabs(runtime: ToolRuntime, text: str, output_filename: Optional[st
         output_filename = f"tts_elevenlabs-test.mp3"
     
     # Ensure audio uploads directory exists
-    audio_dir = Path(UPLOADS_PATH) / "audio"
+    audio_dir = Path(settings.UPLOADS_PATH) / "audio"
     audio_dir.mkdir(parents=True, exist_ok=True)
     output_path = audio_dir / output_filename
     

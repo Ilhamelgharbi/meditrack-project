@@ -144,7 +144,7 @@ def transcribe_audio(runtime: ToolRuntime, audio_path: str, provider: str = "gro
         Dict with transcription text and metadata
     """
     # Validate API key
-    if provider == "groq" and not GROQ_API_KEY:
+    if provider == "groq" and not settings.GROQ_API_KEY:
         return {
             "error": "Groq API key not configured",
             "message": "Set GROQ_API_KEY in .env file",
